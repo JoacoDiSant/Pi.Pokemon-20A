@@ -1,0 +1,116 @@
+body {
+  background-image: url("../../img/648581.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.landing {
+  margin-top: 250px;
+}
+
+/* ------------TEXT-------------- */
+
+.title {
+  background-clip: border-box;
+  mask-image: none;
+  font-family: "Anton", sans-serif;
+  text-align: center;
+  margin: 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-mask-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0, #000),
+    color-stop(0.5, #000),
+    color-stop(1, #000)
+  );
+  transition: background-position 1s, background-color 1s;
+  text-align: center;
+  font-size: 150px;
+  font-weight: 600%;
+  line-height: 1;
+  background-image: url("../../img/pokemon-secret-club-wallpaper-nov142019.jpg"),
+    url("../../img/pokemon-secret-club-wallpaper-nov142019.jpg"),
+    url("../../img/pokemon-secret-club-wallpaper-nov142019.jpg");
+  background-size: 45vw auto, 45vw auto, 30vw auto;
+  background-repeat: repeat-x;
+  background-position: 0px 15%, 200px 25%, -50px 2vw;
+  margin-bottom: 70px;
+
+  /* ----------animations---------- */
+
+  transform: translate(-100%);
+  animation: definition-slide 2.5s 2.5s cubic-bezier(0.26, 0.15, 0.43, 1.42)
+    forwards;
+}
+
+@keyframes definition-slide {
+  0% {
+    transform: translate(-70%);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+/* --------------------------------------- */
+
+.a {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
+
+.a {
+  display: flex;
+  width: 250px;
+  height: 70px;
+  line-height: 70px;
+  font-size: 30px;
+  font-family: sans-serif;
+  text-decoration: none;
+  color: black;
+  text-shadow: 1px 1px 10px #f3c154;
+  border: 2px solid #333;
+  border-radius: 5px;
+  letter-spacing: 2px;
+  justify-content: center;
+  position: relative;
+  margin-left: -120px;
+  transition: all 0.35s;
+  box-shadow: 1px 1px 10px #f3c154;
+
+  /* ----------animations---------- */
+
+  transform: translate(-2000%);
+  animation: definition-slide 2.5s 2.5s cubic-bezier(0.2, 0.1, 0.4, 2.5)
+    forwards;
+}
+
+.a span {
+  position: relative;
+  z-index: 2;
+}
+
+.a:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #f3c154;
+  transition: all 1s;
+  
+}
+
+.a:hover {
+  color: #000;
+}
+
+.a:hover:after {
+  width: 100%;
+  box-shadow: 1px 1px 10px 30px #f3c154;
+}
