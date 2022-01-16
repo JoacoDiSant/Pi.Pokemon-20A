@@ -77,7 +77,7 @@ const GetAllPokemonsDB = async () => {
         attributes: ["id", "name"],
       },
       attributes: [
-        "dbId",
+        "id",
         "name",
         "hp",
         "attack",
@@ -103,7 +103,7 @@ const GetAllPokemonsDBbyName = async (name) => {
         name: name,
       },
       attributes: [
-        "dbId",
+        "id",
         "name",
         "hp",
         "attack",

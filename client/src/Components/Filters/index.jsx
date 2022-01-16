@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import style from './index.module.css'
 import {
   FilterByTypes,
   getTypes,
@@ -38,9 +39,9 @@ function Filters() {
   }
 
   return (
-    <div>
+    <div className={style.container}>
       <div>
-        <select onChange={(e) => handleFilterCreated(e)}>
+        <select onChange={(e) => handleFilterCreated(e)}  className={style.filter}>
           <option value="api" key="API">
             BY Pokedex
           </option>
@@ -50,7 +51,7 @@ function Filters() {
         </select>
       </div>
       <div>
-        <select onChange={(e) => handleSort(e)}>
+        <select onChange={(e) => handleSort(e)} className={style.filter}>
           <option value="A-Z" key="A-Z">
             A to Z
           </option>
@@ -60,7 +61,7 @@ function Filters() {
         </select>
       </div>
       <div>
-        <select onChange={(e) => handleAttack(e)}>
+        <select onChange={(e) => handleAttack(e)} className={style.filter}>
           <option value="strong" key="Mayor">
             stronger to weaker
           </option>
@@ -69,7 +70,7 @@ function Filters() {
           </option>
         </select>
       </div>
-      <select onChange={(e) => handleFiltType(e)}>
+      <select onChange={(e) => handleFiltType(e)} className={style.filter}>
         <option value="All">Filter Type</option>
         {types.map((t, i) => {
           return (

@@ -15,15 +15,17 @@ function NavBar() {
   }
 
   return (
-    <div className={style.Navbar}>
+    <div className={style.NavbarContainer}>
       <SearchBar />
       <Filters />
-      <Link to="/create">
-        <button className={style.aa}>CREATE POKEMON</button>
-      </Link>
-      <button onClick={handleSubmit} className={style.PokemonsBacks}>
-        REFRESH POKEMON
-      </button>
+      <div className={style.btnContainer}>
+        <Link to="/create" className={style.aa}>
+          <button className={style.btn}>CREATE POKEMON</button>
+        </Link>
+        <button onClick={handleSubmit} className={style.PokemonsBacks}>
+          REFRESH POKEMON
+        </button>
+      </div>
     </div>
   );
 }

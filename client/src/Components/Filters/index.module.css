@@ -1,0 +1,14 @@
+.container {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-end;
+}
+
+.filter {
+  cursor: pointer;
+  border-radius: 0px 100px 0px 0px;
+  background-color: #c9d6dcb5;
+  width: 200px;
+  height: 20px;
+}

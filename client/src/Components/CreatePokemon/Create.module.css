@@ -1,0 +1,166 @@
+.form {
+  display: inline-grid;
+  grid-template-rows: 50px;
+  grid-template-columns: 200px 200px 100px 0px;
+  margin-left: 300px;
+}
+
+.SelectTypes {
+  position: relative;
+  font-size: 20px;
+}
+
+/* -------SELECT ------- */
+
+.Selecttype {
+  position: relative;
+  text-transform: capitalize;
+  width: 120px;
+  height: 30px;
+  border: none;
+  background-color: #2c71be3b;
+}
+
+/* ---------------------- */
+
+.eliminate {
+  background-color: transparent;
+  border: none;
+  color: black;
+}
+
+.eliminate:hover {
+  font-size: 20px;
+}
+
+.type {
+  display: flex;
+  justify-content: center;
+  text-transform: capitalize;
+  margin: 0;
+}
+
+/* -------INPUT----- */
+
+.input {
+  border: 1px solid black;
+  border-radius: 0px 0px 100px 0px;
+  width: 200px;
+  height: 20px;
+  background-color: #f6faf352;
+}
+
+.input:active {
+  color: black;
+  background-color: transparent;
+}
+
+/* -------BOTON VOLVER----- */
+
+.BtnBack {
+  position: absolute;
+  top: 28rem;
+  right: 900px;
+  text-transform: uppercase;
+  background-color: transparent;
+  text-decoration: none;
+  border: none;
+  box-shadow: 0 8px 16px 0 rgba(208 229 234), 0 6px 20px 0 rgba(208 229 234);
+  border-radius: 100px 0px 100px 0px;
+  width: 130px;
+  height: 30px;
+}
+.BtnBack:before {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  content: "";
+  top: 100%;
+  left: 5%;
+  height: 20px;
+  width: 90%;
+  opacity: 0;
+  background: -webkit-radial-gradient(
+    center,
+    ellipse,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0) 80%
+  );
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0) 80%
+  );
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform, opacity;
+  transition-property: transform, opacity;
+}
+.BtnBack:hover,
+.BtnBack:focus,
+.BtnBack:active {
+  -webkit-transform: translateY(-5px);
+  transform: translateY(-5px);
+}
+.BtnBack:hover:before,
+.BtnBack:focus:before,
+.BtnBack:active:before {
+  opacity: 1;
+  -webkit-transform: translateY(5px);
+  transform: translateY(5px);
+}
+
+/* -------BOTON CREAR----- */
+
+.create {
+  position: absolute;
+  top: 28rem;
+  right: 740px;
+  text-transform: uppercase;
+  background-color: #d4e6e866;
+  text-decoration: none;
+  border: none;
+  box-shadow: 0 8px 16px 0 rgba(208 229 234), 0 6px 20px 0 rgba(208 229 234);
+  border-radius: 100px 0px 100px 0px;
+  width: 130px;
+  height: 30px;
+}
+.create:before {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  content: "";
+  top: 100%;
+  left: 5%;
+  height: 20px;
+  width: 90%;
+  opacity: 0;
+  background: -webkit-radial-gradient(
+    center,
+    ellipse,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0) 80%
+  );
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0) 80%
+  );
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform, opacity;
+  transition-property: transform, opacity;
+}
+.create:hover,
+.create:focus,
+.create:active {
+  -webkit-transform: translateY(-5px);
+  transform: translateY(-5px);
+}
+.create:hover:before,
+.create:focus:before,
+.create:active:before {
+  opacity: 1;
+  -webkit-transform: translateY(5px);
+  transform: translateY(5px);
+}

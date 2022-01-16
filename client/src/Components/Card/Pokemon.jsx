@@ -6,7 +6,6 @@ function Pokemon({ id, name, image, types, createInDatabase }) {
   let tipodb = createInDatabase
     ? types.map((e) => {
         const nameType = e.name;
-        console.log(nameType)
         return <h5>{nameType}</h5>;
       })
     : types.map((e) => {

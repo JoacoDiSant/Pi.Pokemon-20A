@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getTypes, createPokemon } from "../../StoreFiles/actions";
+import style from "./Create.module.css";
 
 function validate(input) {
   let errors = {};
@@ -27,7 +28,6 @@ function PokemonCreate() {
   const dispatch = useDispatch();
 
   const SelectType = useSelector((state) => state.types);
-  
 
   const [Create, setCreate] = useState({
     name: "",
@@ -38,7 +38,7 @@ function PokemonCreate() {
     height: "",
     weight: "",
     types: [],
-    image:"https://assets.pokemon.com/assets/cms2/img/pokedex/full/865.png"
+    image: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/865.png",
   });
 
   useEffect(() => {
@@ -75,7 +75,8 @@ function PokemonCreate() {
         height: "",
         weight: "",
         types: [],
-        image:"https://assets.pokemon.com/assets/cms2/img/pokedex/full/865.png"
+        image:
+          "https://assets.pokemon.com/assets/cms2/img/pokedex/full/865.png",
       });
     } else {
       alert("The Name, Hp , Attack and Type are obligatory!!");
@@ -90,87 +91,91 @@ function PokemonCreate() {
   }
 
   return (
-    <div className="CreateForm">
-      <div className="header">
+    <div className={style.createForm}>
+      <div>
         <h1>CREATE YOUR OWN POKEMON</h1>
       </div>
-      <div className="Form">
-        <form onSubmit={(e) => handelSubmitPost(e)}>
-          <div className="Formulario">
+      <div>
+        <form onSubmit={(e) => handelSubmitPost(e)} className={style.form}>
+          <div>
             <div>
-              <label className="FormName">Name</label>
+              <label>Name</label>
               <input
                 type="text"
-                className="InputName"
+                className={style.input}
                 value={Create.name}
                 name="name"
                 onChange={(e) => handleChange(e)}
               />
             </div>
             <div>
-              <label className="FormHp">Hp</label>
+              <label>Hp </label>
               <input
                 type="number"
-                className="InputHp"
+                className={style.input}
                 value={Create.hp}
                 name="hp"
                 onChange={(e) => handleChange(e)}
               />
             </div>
             <div>
-              <label className="FormAttack">Attack</label>
+              <label>Attack</label>
               <input
                 type="number"
-                className="InputAttack"
+                className={style.input}
                 value={Create.attack}
                 name="attack"
                 onChange={(e) => handleChange(e)}
               />
             </div>
             <div>
-              <label className="FormDefense">Defense</label>
+              <label>Defense</label>
               <input
                 type="number"
-                className="InputDefense"
+                className={style.input}
                 value={Create.defense}
                 name="defense"
                 onChange={(e) => handleChange(e)}
               />
             </div>
             <div>
-              <label className="FormSpeed">Speed</label>
+              <label>Speed</label>
               <input
                 type="number"
-                className="InputSpeed"
+                className={style.input}
                 value={Create.speed}
                 name="speed"
                 onChange={(e) => handleChange(e)}
               />
             </div>
             <div>
-              <label className="FormHeight">Height</label>
+              <label>Height</label>
               <input
                 type="number"
-                className="InputHeight"
+                className={style.input}
                 value={Create.height}
                 name="height"
                 onChange={(e) => handleChange(e)}
               />
             </div>
             <div>
-              <label className="FormWeight">Weight</label>
+              <label>Weight</label>
               <input
                 type="number"
-                className="InputWeight"
+                className={style.input}
                 value={Create.weight}
                 name="weight"
                 onChange={(e) => handleChange(e)}
               />
             </div>
           </div>
-          <div className="SelectTypes">
-            <label className="SelectTypes">Choose the Type</label>
-            <select name="type" onChange={(e) => handleSelect(e)}>
+          <div className={style.SelectTypes}>
+            <label>Choose the Type</label>
+            <select
+              name="type"
+              onChange={(e) => handleSelect(e)}
+              className={style.Selecttype}
+            >
               {SelectType.map((t, i) => {
                 return (
                   <option value={t.name} key={i}>
@@ -179,28 +184,27 @@ function PokemonCreate() {
                 );
               })}
             </select>
-            <br></br>
             {Create.types.map((e, i) => {
               return (
-                <div key={i}>
+                <div key={i} className={style.type}>
                   <button
                     type="button"
-                    className="EliminateType"
+                    className={style.eliminate}
                     onClick={() => handleDelete(e)}
                   >
                     X
                   </button>
-                  <span>{e}</span>
+                  <p>{e}</p>
                 </div>
               );
             })}
           </div>
-          <button type="submit" className="CreateBtn">
-            Create Pokemon
-          </button>
         </form>
+          <button type="submit" className={style.create}>
+            Create
+          </button>
         <Link to="/home">
-          <button className="BtnBack">Go Back</button>
+          <button className={style.BtnBack}>Go Back</button>
         </Link>
       </div>
     </div>

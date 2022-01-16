@@ -12,12 +12,11 @@
     text-align: center;
     position: relative;
     background-color: rgba(0, 0, 0, 0.2);
-    color: whitesmoke;
+    color: black;
     cursor: pointer;
 }
 
 .page:hover{
-    background-color: gold;
     color: black;
     box-shadow: 1px 1px 10px 5px red;
     transition: all 1s;
