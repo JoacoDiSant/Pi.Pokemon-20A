@@ -1,5 +1,5 @@
 body {
-  background-image: url("../../img/648581.jpg");
+  background-image: url("../../img/Scenery-Anime-Landscape-Picture-Art-28920.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -80,7 +80,7 @@ body {
   position: relative;
   margin-left: -120px;
   transition: all 0.35s;
-  box-shadow: 1px 1px 10px #f3c154;
+  box-shadow: 1px 1px 5px #f3c154;
 
   /* ----------animations---------- */
 
@@ -89,7 +89,7 @@ body {
     forwards;
 }
 
-.a span {
+.a {
   position: relative;
   z-index: 2;
 }
@@ -112,5 +112,5 @@ body {
 
 .a:hover:after {
   width: 100%;
-  box-shadow: 1px 1px 10px 30px #f3c154;
+  box-shadow: 1px 1px 10px 5px rgba(243, 193, 84, 0.4);
 }

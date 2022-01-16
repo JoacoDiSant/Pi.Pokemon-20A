@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetAllPokemons } from "../../StoreFiles/actions";
 import Pokemon from "../Card/Pokemon";
-import Filters from "../Filters";
 import NavBar from "../NavBar/NavBar";
 import Paginado from "../Paginado/Paginado";
+import Loading from "../Loading/Loading";
 
 function Pokemons() {
   let dispatch = useDispatch();
@@ -28,25 +28,37 @@ function Pokemons() {
   );
   const paginado = (numberpage) => {
     SetCurrentPage(numberpage);
-    setPokemonPerPage(12)
+    setPokemonPerPage(12);
   };
 
   // ----------------------------------------
-  return (
-    <div className="Home">
-      <NavBar />
-      <Paginado
-      PokemonPorPagina={PokemonPerPage}
-      pokemon={pokemon.length}
-      Paginado={paginado} />
-      <Filters />
-      {currentPokemons.map((p) => {
-        return (
-          <Pokemon key={Math.random()} name={p.name} image={p.image} types={p.types} createInDatabase={p.createInDatabase} />
+
+  if (currentPokemons) {
+    const pokeComponent = () => (
+      <div className="Home">
+        <NavBar />
+        {currentPokemons.map((p) => {
+          return (
+            <Pokemon
+              key={Math.random()}
+              id={p.id}
+              name={p.name}
+              image={p.image}
+              types={p.types}
+              createInDatabase={p.createInDatabase}
+            />
           );
         })}
-    </div>
-  );
+        <Paginado
+          PokemonPorPagina={PokemonPerPage}
+          pokemon={pokemon.length}
+          Paginado={paginado}
+        />
+      </div>
+    );
+    return currentPokemons.length ? pokeComponent() : <Loading />;
+  }
 }
+
 
 export default Pokemons;

@@ -70,7 +70,7 @@ function PokemonCreate() {
         name: "",
         hp: "",
         attack: "",
-        Defense: "",
+        defense: "",
         speed: "",
         height: "",
         weight: "",

@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import style from "./Landing.module.css";
 
 function LandingPage() {
-  
   return (
-    <div className="landing">
-      <h1 className="name">WELCOME TO MY POKEAPP</h1>
-      <Link to="/home" className="a">
-        <span className="button">ENTER</span>
+    <div className={style.landing}>
+      <h1 className={style.title}>WELCOME TO MY POKEAPP</h1>
+      <Link to="/home" className={style.a}>
+        ENTER
       </Link>
     </div>
   );
 }
 
-export default LandingPage
+export default LandingPage;

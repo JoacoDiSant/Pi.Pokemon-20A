@@ -1,8 +1,12 @@
 import axios from "axios";
 export const GET_ALL_POKEMONS = "GET_ALL_POKEMONS";
 export const GET_TYPES = "GET_TYPES";
-export const POKEMON_ENCONTRADO = "POKEMON_ENCONTRADO";
+export const BUSCADO_POR_NOMBRE = "BUSCADO_POR_NOMBRE";
+export const BUSCADO_POR_ID = "BUSCADO_POR_ID";
 export const FILTER_BY_TYPES = "FILTER_BY_TYPES";
+export const ORDER_BY_CREATE = "ORDER_BY_CREATE";
+export const ORDER_ALPHABE = "ORDER_ALPHABE";
+export const ORDER_FUERZA = "ORDER_FUERZA";
 
 export function GetAllPokemons() {
   return function (dispatch) {
@@ -25,8 +29,19 @@ export function getPokemonByName(search) {
     return await axios
       .get(`http://localhost:3001/api/pokemons?name=${search}`)
       .then((json) =>
-        dispatch({ type: POKEMON_ENCONTRADO, payload: json.data })
+        dispatch({ type: BUSCADO_POR_NOMBRE, payload: json.data })
       )
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+}
+
+export function getPokemonById(id) {
+  return async function (dispatch) {
+    return await axios
+      .get(`http://localhost:3001/api/pokemons/${id}`)
+      .then((json) => dispatch({ type: BUSCADO_POR_ID, payload: json.data }))
       .catch((e) => {
         console.log(e);
       });
@@ -60,9 +75,29 @@ export function getTypes() {
 }
 
 export function FilterByTypes(payload) {
-  console.log(payload)
   return {
-    type: "FILTER_BY_TYPES",
+    type: FILTER_BY_TYPES,
+    payload,
+  };
+}
+
+export function FilterCreated(payload) {
+  return {
+    type: ORDER_BY_CREATE,
+    payload,
+  };
+}
+
+export function OrdenAlphabeth(payload) {
+  return {
+    type: ORDER_ALPHABE,
+    payload,
+  };
+}
+
+export function Ordenfuerza(payload) {
+  return {
+    type: ORDER_FUERZA,
     payload,
   };
 }

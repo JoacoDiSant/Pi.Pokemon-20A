@@ -1,10 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import style from "./pokemon.module.css";
 
-function Pokemon({ name, image, types, createInDatabase }) {
-  console.log(createInDatabase)
+function Pokemon({ id, name, image, types, createInDatabase }) {
   let tipodb = createInDatabase
     ? types.map((e) => {
         const nameType = e.name;
+        console.log(nameType)
         return <h5>{nameType}</h5>;
       })
     : types.map((e) => {
@@ -12,11 +14,13 @@ function Pokemon({ name, image, types, createInDatabase }) {
       });
 
   return (
-    <div className="pokemon">
-      <h1 className="name">{name}</h1>
-      <img src={image} alt={`pokemon ${name}`} className="imagen" />
-      <div className="tipos">{tipodb}</div>
-    </div>
+    <Link to={`/detail/${id}`} className={style.a}>
+      <div className={style.pokemon}>
+        <h1 className={style.name}>{name}</h1>
+        <img src={image} alt={`pokemon ${name}`} className={style.imagen} />
+        <div className={style.tipos}>{tipodb}</div>
+      </div>
+    </Link>
   );
 }
 
