@@ -1,0 +1,29 @@
+.cuatrocerocuatro,
+.error,
+.back {
+  font-size: 100px;
+  color: white;
+  text-shadow: 0px -5px 13px #ff0000;
+}
+
+.cuatrocerocuatro {
+  animation: slide-right 1s linear infinite alternate-reverse both;
+}
+
+.error {
+  animation: slide-right 1s linear infinite alternate both;
+}
+
+@keyframes slide-right {
+  0% {
+    transform: translateX(-100px);
+  }
+  100% {
+    transform: translateX(100px);
+  }
+}
+
+.back{
+  text-decoration: none;
+  cursor: pointer;
+}

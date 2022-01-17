@@ -4,30 +4,83 @@ import { Link } from "react-router-dom";
 import { getTypes, createPokemon } from "../../StoreFiles/actions";
 import style from "./Create.module.css";
 
-function validate(input) {
-  let errors = {};
-
-  if (!input.name) {
-    errors.name = "Hey! Dont Forget My Name";
-  }
-  if (!input.hp) {
-    errors.hp = "Hey! Dont Forget My Hp";
-  }
-  if (!input.attack) {
-    errors.attack = "Hey! Dont Forget My Attack";
-  }
-
-  if (!input.types.length) {
-    errors.types = "Hey! Dont Forget My Type";
-  }
-
-  return errors;
-}
-
 function PokemonCreate() {
   const dispatch = useDispatch();
 
   const SelectType = useSelector((state) => state.types);
+
+  // --------- CONTROL DEL FORMULARIO ----------
+
+  function validate(input) {
+    let errors = {};
+
+    if (!validateName.test(input.name)) {
+      errors.name = "Name is require and MUST be letters";
+    }
+    if (!validateNum.test(input.hp) || input.hp < 1 || input.hp > 300) {
+      errors.hp = "HP is require and MUST be a number between 0 and 300";
+    }
+    if (
+      !validateNum.test(input.attack) ||
+      input.attack < 10 ||
+      input.attack > 500
+    ) {
+      errors.attack =
+        "Attack is require and MUST be a number between 10 and 500";
+    }
+    if (
+      !validateNum.test(input.defense) ||
+      input.defense < 1 ||
+      input.defense > 100
+    ) {
+      errors.defense =
+        "Defense is require and MUST be a number between 0 and 100";
+    }
+    if (
+      !validateNum.test(input.speed) ||
+      input.speed < 10 ||
+      input.speed > 500
+    ) {
+      errors.speed = "Speed is require and MUST be a number between 10 and 500";
+    }
+    if (
+      !validateNum.test(input.height) ||
+      input.height < 30 ||
+      input.height > 100
+    ) {
+      errors.height =
+        "Height is require and MUST be a number between 30 and 100";
+    }
+    if (
+      !validateNum.test(input.weight) ||
+      input.weight < 10 ||
+      input.weight > 500
+    ) {
+      errors.weight =
+        "Weight is require and MUST be a number between 10 and 500";
+    }
+    if (!input.types.length) {
+      errors.types = "Hey! Dont Forget My Type";
+    }
+
+    return errors;
+  }
+
+  const [stats, setstats] = useState({
+    hp: "",
+    attack: "",
+    defense: "",
+    speed: "",
+    height: "",
+    weight: "",
+  });
+
+  const [error, setError] = useState("");
+
+  let validateName = /^[a-z]+$/i;
+  let validateNum = /^([0-9])*$/;
+
+  // --------- CREACION FORMULARIO ----------
 
   const [Create, setCreate] = useState({
     name: "",
@@ -50,6 +103,12 @@ function PokemonCreate() {
       ...Create,
       [e.target.name]: e.target.value,
     });
+    setError(
+      validate({
+        ...Create,
+        [e.target.name]: e.target.value,
+      })
+    );
   }
 
   function handleSelect(e) {
@@ -61,9 +120,17 @@ function PokemonCreate() {
 
   function handelSubmitPost(e) {
     e.preventDefault();
-    const error = validate(Create);
-
-    if (!Object.keys(error).length) {
+    if (
+      !error.name &&
+      !error.img &&
+      !error.hp &&
+      !error.attack &&
+      !error.defense &&
+      !error.speed &&
+      !error.heightt &&
+      !error.weight &&
+      !error.types
+    ) {
       dispatch(createPokemon(Create));
       alert("Pokemon Was Successfully Create!!");
       setCreate({
@@ -79,7 +146,7 @@ function PokemonCreate() {
           "https://assets.pokemon.com/assets/cms2/img/pokedex/full/865.png",
       });
     } else {
-      alert("The Name, Hp , Attack and Type are obligatory!!");
+      console.log(error);
     }
   }
 
@@ -101,12 +168,14 @@ function PokemonCreate() {
             <div>
               <label>Name</label>
               <input
-                type="text"
                 className={style.input}
-                value={Create.name}
+                type="text"
+                placeholder="Name..."
                 name="name"
+                value={Create.name}
                 onChange={(e) => handleChange(e)}
               />
+              {!error ? null : <p className={style.errorN}>{error.name}</p>}
             </div>
             <div>
               <label>Hp </label>
@@ -114,9 +183,11 @@ function PokemonCreate() {
                 type="number"
                 className={style.input}
                 value={Create.hp}
+                placeholder="HP..."
                 name="hp"
                 onChange={(e) => handleChange(e)}
               />
+              {!error ? null : <p className={style.errorH}>{error.hp}</p>}
             </div>
             <div>
               <label>Attack</label>
@@ -124,9 +195,11 @@ function PokemonCreate() {
                 type="number"
                 className={style.input}
                 value={Create.attack}
+                placeholder="Attack..."
                 name="attack"
                 onChange={(e) => handleChange(e)}
               />
+              {!error ? null : <p className={style.errorA}>{error.attack}</p>}
             </div>
             <div>
               <label>Defense</label>
@@ -134,9 +207,11 @@ function PokemonCreate() {
                 type="number"
                 className={style.input}
                 value={Create.defense}
+                placeholder="Defense..."
                 name="defense"
                 onChange={(e) => handleChange(e)}
               />
+              {!error ? null : <p className={style.errorD}>{error.defense}</p>}
             </div>
             <div>
               <label>Speed</label>
@@ -144,9 +219,11 @@ function PokemonCreate() {
                 type="number"
                 className={style.input}
                 value={Create.speed}
+                placeholder="Speed..."
                 name="speed"
                 onChange={(e) => handleChange(e)}
               />
+              {!error ? null : <p className={style.errorS}>{error.speed}</p>}
             </div>
             <div>
               <label>Height</label>
@@ -154,9 +231,11 @@ function PokemonCreate() {
                 type="number"
                 className={style.input}
                 value={Create.height}
+                placeholder="Height..."
                 name="height"
                 onChange={(e) => handleChange(e)}
               />
+              {!error ? null : <p className={style.errorHE}>{error.height}</p>}
             </div>
             <div>
               <label>Weight</label>
@@ -164,9 +243,11 @@ function PokemonCreate() {
                 type="number"
                 className={style.input}
                 value={Create.weight}
+                placeholder="Weight..."
                 name="weight"
                 onChange={(e) => handleChange(e)}
               />
+              {!error ? null : <p className={style.errorW}>{error.weight}</p>}
             </div>
           </div>
           <div className={style.SelectTypes}>
@@ -180,6 +261,7 @@ function PokemonCreate() {
                 return (
                   <option value={t.name} key={i}>
                     {t.name}
+                    {!error ? null : <p className={style.errorT}>{error.types}</p>}
                   </option>
                 );
               })}
@@ -199,10 +281,10 @@ function PokemonCreate() {
               );
             })}
           </div>
-        </form>
           <button type="submit" className={style.create}>
             Create
           </button>
+        </form>
         <Link to="/home">
           <button className={style.BtnBack}>Go Back</button>
         </Link>

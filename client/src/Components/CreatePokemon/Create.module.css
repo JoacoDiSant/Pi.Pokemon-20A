@@ -69,9 +69,9 @@
   border-radius: 100px 0px 100px 0px;
   width: 130px;
   height: 30px;
+  cursor: pointer;
 }
 .BtnBack:before {
-  pointer-events: none;
   position: absolute;
   z-index: -1;
   content: "";
@@ -124,9 +124,9 @@
   border-radius: 100px 0px 100px 0px;
   width: 130px;
   height: 30px;
+  cursor: pointer;
 }
 .create:before {
-  pointer-events: none;
   position: absolute;
   z-index: -1;
   content: "";
@@ -163,4 +163,49 @@
   opacity: 1;
   -webkit-transform: translateY(5px);
   transform: translateY(5px);
+}
+
+/* ----ERROR MESAGE---- */
+
+.errorN{
+  font-size: 15px;
+  position: absolute;
+  left: 560px;
+  top: 90px;
+}
+.errorH{
+  font-size: 15px;
+  position: absolute;
+  left: 440px;
+  top: 140px;
+}
+.errorA{
+  font-size: 15px;
+  position: absolute;
+  left: 410px;
+  top: 185px;
+}
+.errorD{
+  font-size: 15px;
+  position: absolute;
+  left: 405px;
+  top: 230px;
+}
+.errorS{
+  font-size: 15px;
+  position: absolute;
+  left: 410px;
+  top: 275px;
+}
+.errorW{
+  font-size: 15px;
+  position: absolute;
+  left: 410px;
+  top: 367px;
+}
+.errorHE{
+  font-size: 15px;
+  position: absolute;
+  left: 410px;
+  top: 323px;
 }

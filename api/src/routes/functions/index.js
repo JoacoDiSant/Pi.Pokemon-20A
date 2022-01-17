@@ -159,7 +159,6 @@ const GetPokemonDBbyId = async (id) => {
 const CreatePokemon = async (pokemon) => {
   let { id, name, hp, attack, defense, speed, height, weight, image, types } =
     pokemon;
-  console.log(name, hp, attack, defense, speed, height, weight, image, types);
   try {
     const newPokemon = await Pokemon.create({
       id,

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { GetAllPokemons } from "../../StoreFiles/actions";
 import SearchBar from "./SearchBar";
 import style from "./NavBar.module.css";
-import Filters from "../Filters";
 
 function NavBar() {
   let dispatch = useDispatch();
@@ -17,7 +16,6 @@ function NavBar() {
   return (
     <div className={style.NavbarContainer}>
       <SearchBar />
-      <Filters />
       <div className={style.btnContainer}>
         <Link to="/create" className={style.aa}>
           <button className={style.btn}>CREATE POKEMON</button>
