@@ -1,90 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getTypes, createPokemon } from "../../StoreFiles/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { createPokemon, getTypes } from "../../StoreFiles/actions";
 import style from "./Create.module.css";
 
-function PokemonCreate() {
+export default function CreatePokemon() {
   const dispatch = useDispatch();
+  const selectType = useSelector((state) => state.types);
+  const [error, setError] = useState({});
 
-  const SelectType = useSelector((state) => state.types);
+  const [handleTypes, setHandleTypes] = useState([]);
 
-  // --------- CONTROL DEL FORMULARIO ----------
-
-  function validate(input) {
-    let errors = {};
-
-    if (!validateName.test(input.name)) {
-      errors.name = "Name is require and MUST be letters";
-    }
-    if (!validateNum.test(input.hp) || input.hp < 1 || input.hp > 300) {
-      errors.hp = "HP is require and MUST be a number between 0 and 300";
-    }
-    if (
-      !validateNum.test(input.attack) ||
-      input.attack < 10 ||
-      input.attack > 500
-    ) {
-      errors.attack =
-        "Attack is require and MUST be a number between 10 and 500";
-    }
-    if (
-      !validateNum.test(input.defense) ||
-      input.defense < 1 ||
-      input.defense > 100
-    ) {
-      errors.defense =
-        "Defense is require and MUST be a number between 0 and 100";
-    }
-    if (
-      !validateNum.test(input.speed) ||
-      input.speed < 10 ||
-      input.speed > 500
-    ) {
-      errors.speed = "Speed is require and MUST be a number between 10 and 500";
-    }
-    if (
-      !validateNum.test(input.height) ||
-      input.height < 30 ||
-      input.height > 100
-    ) {
-      errors.height =
-        "Height is require and MUST be a number between 30 and 100";
-    }
-    if (
-      !validateNum.test(input.weight) ||
-      input.weight < 10 ||
-      input.weight > 500
-    ) {
-      errors.weight =
-        "Weight is require and MUST be a number between 10 and 500";
-    }
-    if (!input.types.length) {
-      errors.types = "Must select at least one type and a maximun of two";
-    }
-
-    return errors;
-  }
-
-  // const [stats, setstats] = useState({
-  //   hp: "",
-  //   attack: "",
-  //   defense: "",
-  //   speed: "",
-  //   height: "",
-  //   weight: "",
-  // });
-
-  const [error, setError] = useState("");
-
-  let validateName = /^[a-z]+$/i;
-  let validateNum = /^([0-9])*$/;
-
-  // --------- CREACION FORMULARIO ----------
-
-  const [simon, setSimon] = useState([]);
-
-  const [Create, setCreate] = useState({
+  const [input, setInput] = useState({
     name: "",
     hp: "",
     attack: "",
@@ -96,222 +24,278 @@ function PokemonCreate() {
     image: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/865.png",
   });
 
-  useEffect(() => {
-    dispatch(getTypes());
-  }, [dispatch]);
+  const resetState = () => {
+    setInput({
+      name: "",
+      hp: "",
+      attack: "",
+      defense: "",
+      speed: "",
+      height: "",
+      weight: "",
+      types: [],
+      image: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/865.png",
+    });
+  };
+
+  let validateName = /^[a-z]+$/i;
+  let validateNum = /^([0-9])*$/;
+
+  // -----------------------------------------------------------------------------------------------------------------------------------
+  // Validate.
+  // -----------------------------------------------------------------------------------------------------------------------------------
+
+  const validate = () => {
+    let errors = {};
+    if (!validateName.test(input.name) || !input.name) {
+      errors.name = "Name required and must be letters";
+    }
+    if (!validateNum.test(input.hp) || input.hp < 1 || input.hp > 300) {
+      errors.hp = "HP is require and must be a number between 0 and 300";
+    }
+    if (
+      !validateNum.test(input.attack) ||
+      input.attack < 10 ||
+      input.attack > 500
+    ) {
+      errors.attack =
+        "Attack is require and must be a number between 10 and 500";
+    }
+    if (
+      !validateNum.test(input.defense) ||
+      input.defense < 10 ||
+      input.defense > 100
+    ) {
+      errors.defense =
+        "Defense is require and must be a number between 10 and 100";
+    }
+    if (
+      !validateNum.test(input.speed) ||
+      input.speed < 10 ||
+      input.speed > 500
+    ) {
+      errors.speed = "Speed is require and must be a number between 10 and 500";
+    }
+    if (
+      !validateNum.test(input.height) ||
+      input.height < 10 ||
+      input.height > 300
+    ) {
+      errors.height =
+        "Height is require and must be a number between 10 and 300";
+    }
+    if (
+      !validateNum.test(input.weight) ||
+      input.weight < 10 ||
+      input.weight > 100
+    ) {
+      errors.weight =
+        "Weight is require and must be a number between 10 and 100";
+    }
+
+    return errors;
+  };
 
   function handleChange(e) {
-    setCreate({
-      ...Create,
+    setInput({
+      ...input,
       [e.target.name]: e.target.value,
     });
     setError(
       validate({
-        ...Create,
+        ...input,
         [e.target.name]: e.target.value,
       })
     );
   }
 
   function handleSelect(e) {
-    if (simon.find((x) => x === e.target.value)) {
-      setCreate({
-        ...Create,
-        types: !Create.types.includes(e.target.value)
-          ? [...Create.types, e.target.value]
-          : Create.types,
+    if (handleTypes.find((x) => x === e.target.value)) {
+      setInput({
+        ...input,
+        types: !input.types.includes(e.target.value)
+          ? [...input.types, e.target.value]
+          : input.types,
       });
-      setSimon(simon.filter((x) => x !== e.target.value));
+      setHandleTypes(handleTypes.filter((x) => x !== e.target.value));
     } else {
-      if (simon.length === 2) return;
-      setSimon([...simon, e.target.value]);
+      if (handleTypes.length === 2) return;
+      setHandleTypes([...handleTypes, e.target.value]);
     }
   }
 
-  function handelSubmitPost(e) {
+  function handleSubmitPost(e) {
     e.preventDefault();
     if (
       !error.name &&
-      !error.img &&
       !error.hp &&
       !error.attack &&
       !error.defense &&
       !error.speed &&
-      !error.heightt &&
+      !error.height &&
       !error.weight &&
       !error.types
     ) {
       if (
-        !Create.name.length === 0 ||
-        !Create.hp.length === 0 ||
-        !Create.attack.length === 0 ||
-        !Create.weight.length === 0
+        input.name.length !== 0 &&
+        input.hp.length !== 0 &&
+        input.attack.length !== 0
       ) {
-        console.log("gola?");
-        dispatch(createPokemon(Create));
-        alert("Pokemon Was Successfully Create!!");
-        setCreate({
-          name: "",
-          hp: "",
-          attack: "",
-          defense: "",
-          speed: "",
-          height: "",
-          weight: "",
-          types: [],
-          image:
-            "https://assets.pokemon.com/assets/cms2/img/pokedex/full/865.png",
+        setInput({
+          ...input,
+          types: handleTypes.map((e) => input.types.push(e)),
         });
+        console.log(input);
+        dispatch(createPokemon(input));
+        resetState();
+        alert("Pokemon successfully created ");
       } else {
-        alert("Hay Campos Incompletos");
+        alert("The form is required");
       }
     } else {
-      alert("Hay Campos Incompletos");
+      alert("The form is required");
     }
   }
 
-  // function handleDelete(el) {
-  //   console.log("simon?")
-  //   setSimon({
-  //     ...simon,
-  //     simon: simon.filter((type) => type !== el),
-  //   });
-  // }
+  useEffect(() => {
+    dispatch(getTypes());
+  }, [dispatch]);
 
   return (
-    <div className={style.createForm}>
-      <div>
-        <h1>CREATE YOUR OWN POKEMON</h1>
-      </div>
-      <div>
-        <form onSubmit={(e) => handelSubmitPost(e)} className={style.form}>
-          <div>
-            <div>
-              <label>Name</label>
-              <input
-                className={style.input}
-                type="text"
-                placeholder="Name..."
-                name="name"
-                value={Create.name}
-                onChange={(e) => handleChange(e)}
-              />
-              {!error ? null : <p className={style.errorN}>{error.name}</p>}
-            </div>
-            <div>
-              <label>Hp </label>
-              <input
-                type="number"
-                className={style.input}
-                value={Create.hp}
-                placeholder="HP..."
-                name="hp"
-                onChange={(e) => handleChange(e)}
-              />
-              {!error ? null : <p className={style.errorH}>{error.hp}</p>}
-            </div>
-            <div>
-              <label>Attack</label>
-              <input
-                type="number"
-                className={style.input}
-                value={Create.attack}
-                placeholder="Attack..."
-                name="attack"
-                onChange={(e) => handleChange(e)}
-              />
-              {!error ? null : <p className={style.errorA}>{error.attack}</p>}
-            </div>
-            <div>
-              <label>Defense</label>
-              <input
-                type="number"
-                className={style.input}
-                value={Create.defense}
-                placeholder="Defense..."
-                name="defense"
-                onChange={(e) => handleChange(e)}
-              />
-              {!error ? null : <p className={style.errorD}>{error.defense}</p>}
-            </div>
-            <div>
-              <label>Speed</label>
-              <input
-                type="number"
-                className={style.input}
-                value={Create.speed}
-                placeholder="Speed..."
-                name="speed"
-                onChange={(e) => handleChange(e)}
-              />
-              {!error ? null : <p className={style.errorS}>{error.speed}</p>}
-            </div>
-            <div>
-              <label>Height</label>
-              <input
-                type="number"
-                className={style.input}
-                value={Create.height}
-                placeholder="Height..."
-                name="height"
-                onChange={(e) => handleChange(e)}
-              />
-              {!error ? null : <p className={style.errorHE}>{error.height}</p>}
-            </div>
-            <div>
-              <label>Weight</label>
-              <input
-                type="number"
-                className={style.input}
-                value={Create.weight}
-                placeholder="Weight..."
-                name="weight"
-                onChange={(e) => handleChange(e)}
-              />
-              {!error ? null : <p className={style.errorW}>{error.weight}</p>}
-            </div>
-          </div>
-          <div className={style.SelectTypes}>
-            <label>Choose the Type</label>
-            <select
-              name="type"
-              onChange={(e) => handleSelect(e)}
-              className={style.Selecttype}
-            >
-              {SelectType.map((t, i) => {
-                return (
-                  <option value={t.name} key={i}>
-                    {t.name}
-                  </option>
-                );
-              })}
-            </select>
-            {!error ? null : <p className={style.errorT}>{error.types}</p>}
-            {simon.map((e, i) => {
+    <div>
+      <h1>Create a Pokemon!</h1>
+
+      <form onSubmit={(e) => handleSubmitPost(e)} className={style.form}>
+        <div>
+          <label>Name:</label>
+          <input
+            key="name"
+            type="text"
+            value={input.name}
+            name="name"
+            onChange={(e) => handleChange(e)}
+            className={style.input}
+          />
+          {!error ? null : <p className={style.errorN}>{error.name}</p>}
+        </div>
+
+        <div className={style.inputLabel}>
+          <label>Hp:</label>
+          <input
+            key="hp"
+            type="number"
+            value={input.hp}
+            name="hp"
+            onChange={(e) => handleChange(e)}
+            className={style.input}
+          />
+          {!error ? null : <p className={style.errorH}>{error.hp}</p>}
+        </div>
+
+        <div className={style.inputLabel}>
+          <label>Attack:</label>
+          <input
+            key="attack"
+            type="number"
+            value={input.attack}
+            name="attack"
+            onChange={(e) => handleChange(e)}
+            className={style.input}
+          />
+          {!error ? null : <p className={style.errorA}>{error.attack}</p>}
+        </div>
+
+        <div className={style.inputLabel}>
+          <label>Defense:</label>
+          <input
+            key="defense"
+            type="number"
+            value={input.defense}
+            name="defense"
+            onChange={(e) => handleChange(e)}
+            className={style.input}
+          />
+          {!error ? null : <p className={style.errorD}>{error.defense}</p>}
+        </div>
+
+        <div className={style.inputLabel}>
+          <label>Speed:</label>
+          <input
+            key="speed"
+            type="number"
+            value={input.speed}
+            name="speed"
+            onChange={(e) => handleChange(e)}
+            className={style.input}
+          />
+          {!error ? null : <p className={style.errorS}>{error.speed}</p>}
+        </div>
+
+        <div className={style.inputLabel}>
+          <label>Height:</label>
+          <input
+            key="height"
+            type="number"
+            value={input.height}
+            name="height"
+            onChange={(e) => handleChange(e)}
+            className={style.input}
+          />
+          {!error ? null : <p className={style.errorHE}>{error.height}</p>}
+        </div>
+
+        <div className={style.inputLabel}>
+          <label>Weight:</label>
+          <input
+            key="weight"
+            type="number"
+            value={input.weight}
+            name="weight"
+            onChange={(e) => handleChange(e)}
+            className={style.input}
+          />
+          {!error ? null : <p className={style.errorW}>{error.weight}</p>}
+        </div>
+        <div>
+          <label>Choose the Type</label>
+          <select
+            name="types"
+            onChange={(e) => handleSelect(e)}
+            className={style.Selecttype}
+          >
+            {selectType.map((t, i) => {
               return (
-                <div key={i} className={style.type}>
-                  <button
-                    type="button"
-                    className={style.eliminate}
-                    onClick={(e) => handleChange(e)}
-                  >
-                    X
-                  </button>
-                  <p>{e}</p>
-                </div>
+                <option value={t.name} key={i}>
+                  {t.name}
+                </option>
               );
             })}
-          </div>
-          <button type="submit" className={style.create}>
-            Create
-          </button>
-        </form>
+          </select>
+          {!error ? null : <p className={style.errorT}>{error.types}</p>}
+          {handleTypes.map((e, i) => {
+            return (
+              <div key={i} className={style.type}>
+                <button
+                  type="button"
+                  onClick={() => handleChange(e)}
+                  className={style.eliminate}
+                >
+                  X
+                </button>
+                <span>{e}</span>
+              </div>
+            );
+          })}
+        </div>
+
+        <button type="submit" className={style.create}>
+          Create
+        </button>
+
         <Link to="/home">
-          <button className={style.BtnBack}>Go Back</button>
+          <button className={style.BtnBack}>Go back</button>
         </Link>
-      </div>
+      </form>
     </div>
   );
 }
-
-export default PokemonCreate;

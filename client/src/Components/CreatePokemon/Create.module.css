@@ -1,8 +1,7 @@
 .form {
-  display: inline-grid;
-  grid-template-rows: 50px;
-  grid-template-columns: 200px 200px 100px 0px;
-  margin-left: 300px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .SelectTypes {
@@ -48,6 +47,8 @@
   width: 200px;
   height: 20px;
   background-color: #f6faf352;
+  margin-bottom: 10px;
+  margin-left: 5px;
 }
 
 .input:active {
@@ -170,50 +171,50 @@
 .errorN{
   font-size: 15px;
   position: absolute;
-  left: 560px;
-  top: 90px;
+  left: 1080px;
+  top: 67px;
   color: red;
 }
 .errorH{
   font-size: 15px;
   position: absolute;
-  left: 440px;
-  top: 140px;
+  left: 1080px;
+  top: 105px;
   color: red;
 }
 .errorA{
   font-size: 15px;
   position: absolute;
-  left: 410px;
-  top: 185px;
+  left: 1080px;
+  top: 140px;
   color: red;
 }
 .errorD{
   font-size: 15px;
   position: absolute;
-  left: 405px;
-  top: 230px;
+  left: 1080px;
+  top: 170px;
   color: red;
 }
 .errorS{
   font-size: 15px;
   position: absolute;
-  left: 410px;
-  top: 275px;
+  left: 1080px;
+  top: 205px;
   color: red;
 }
 .errorW{
   font-size: 15px;
   position: absolute;
-  left: 410px;
-  top: 367px;
+  left: 1080px;
+  top: 275px;
   color: red;
 }
 .errorHE{
   font-size: 15px;
   position: absolute;
-  left: 410px;
-  top: 323px;
+  left: 1080px;
+  top: 240px;
   color: red;
 }
 
