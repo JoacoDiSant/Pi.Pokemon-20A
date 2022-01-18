@@ -136,7 +136,8 @@ function Pokemons() {
             })}
           </select>
         </div>
-        {/* ---------------------- */}
+
+        {/* --------POKEMONS------ */}
 
         {currentPokemons.map((p) => {
           return (
