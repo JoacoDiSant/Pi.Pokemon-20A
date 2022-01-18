@@ -35,11 +35,13 @@ export default function rootReducer(state = initialState, action) {
       };
 
     case "FILTER_BY_TYPES":
-      let allPoke = state.pokemons
-      let typefilt =
-        action.payload === "all"
-          ? allPoke
-          : allPoke.filter((p) => p.types.includes(action.payload));
+      let typefilt = action.payload === "All"
+          ? state.AllPokemons
+          : state.AllPokemons.filter((p) =>
+              p.types.some(
+                (t) => t === action.payload || t.name === action.payload
+              )
+            );
       return {
         ...state,
         pokemons: typefilt,

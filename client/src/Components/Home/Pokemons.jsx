@@ -126,7 +126,7 @@ function Pokemons() {
             </select>
           </div>
           <select onChange={(e) => handleFiltType(e)} className={style.filter}>
-            <option value="All">Filter Type</option>
+            <option value="All">All types</option>
             {types.map((t, i) => {
               return (
                 <option value={t.name} key={i}>
