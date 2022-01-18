@@ -172,40 +172,55 @@
   position: absolute;
   left: 560px;
   top: 90px;
+  color: red;
 }
 .errorH{
   font-size: 15px;
   position: absolute;
   left: 440px;
   top: 140px;
+  color: red;
 }
 .errorA{
   font-size: 15px;
   position: absolute;
   left: 410px;
   top: 185px;
+  color: red;
 }
 .errorD{
   font-size: 15px;
   position: absolute;
   left: 405px;
   top: 230px;
+  color: red;
 }
 .errorS{
   font-size: 15px;
   position: absolute;
   left: 410px;
   top: 275px;
+  color: red;
 }
 .errorW{
   font-size: 15px;
   position: absolute;
   left: 410px;
   top: 367px;
+  color: red;
 }
 .errorHE{
   font-size: 15px;
   position: absolute;
   left: 410px;
   top: 323px;
+  color: red;
+}
+
+.errorT{
+  font-size: 15px;
+  position: absolute;
+  right: -330px;
+  top: -10px;
+  color: red;
 }

@@ -60,20 +60,20 @@ function PokemonCreate() {
         "Weight is require and MUST be a number between 10 and 500";
     }
     if (!input.types.length) {
-      errors.types = "Hey! Dont Forget My Type";
+      errors.types = "Must select at least one type and a maximun of two";
     }
 
     return errors;
   }
 
-  const [stats, setstats] = useState({
-    hp: "",
-    attack: "",
-    defense: "",
-    speed: "",
-    height: "",
-    weight: "",
-  });
+  // const [stats, setstats] = useState({
+  //   hp: "",
+  //   attack: "",
+  //   defense: "",
+  //   speed: "",
+  //   height: "",
+  //   weight: "",
+  // });
 
   const [error, setError] = useState("");
 
@@ -81,6 +81,8 @@ function PokemonCreate() {
   let validateNum = /^([0-9])*$/;
 
   // --------- CREACION FORMULARIO ----------
+
+  const [simon, setSimon] = useState([]);
 
   const [Create, setCreate] = useState({
     name: "",
@@ -112,10 +114,18 @@ function PokemonCreate() {
   }
 
   function handleSelect(e) {
-    setCreate({
-      ...Create,
-      types: [...Create.types, e.target.value],
-    });
+    if (simon.find((x) => x === e.target.value)) {
+      setCreate({
+        ...Create,
+        types: !Create.types.includes(e.target.value)
+          ? [...Create.types, e.target.value]
+          : Create.types,
+      });
+      setSimon(simon.filter((x) => x !== e.target.value));
+    } else {
+      if (simon.length === 2) return;
+      setSimon([...simon, e.target.value]);
+    }
   }
 
   function handelSubmitPost(e) {
@@ -131,31 +141,42 @@ function PokemonCreate() {
       !error.weight &&
       !error.types
     ) {
-      dispatch(createPokemon(Create));
-      alert("Pokemon Was Successfully Create!!");
-      setCreate({
-        name: "",
-        hp: "",
-        attack: "",
-        defense: "",
-        speed: "",
-        height: "",
-        weight: "",
-        types: [],
-        image:
-          "https://assets.pokemon.com/assets/cms2/img/pokedex/full/865.png",
-      });
+      if (
+        !Create.name.length === 0 ||
+        !Create.hp.length === 0 ||
+        !Create.attack.length === 0 ||
+        !Create.weight.length === 0
+      ) {
+        console.log("gola?");
+        dispatch(createPokemon(Create));
+        alert("Pokemon Was Successfully Create!!");
+        setCreate({
+          name: "",
+          hp: "",
+          attack: "",
+          defense: "",
+          speed: "",
+          height: "",
+          weight: "",
+          types: [],
+          image:
+            "https://assets.pokemon.com/assets/cms2/img/pokedex/full/865.png",
+        });
+      } else {
+        alert("Hay Campos Incompletos");
+      }
     } else {
-      console.log(error);
+      alert("Hay Campos Incompletos");
     }
   }
 
-  function handleDelete(el) {
-    setCreate({
-      ...Create,
-      types: Create.types.filter((type) => type !== el),
-    });
-  }
+  // function handleDelete(el) {
+  //   console.log("simon?")
+  //   setSimon({
+  //     ...simon,
+  //     simon: simon.filter((type) => type !== el),
+  //   });
+  // }
 
   return (
     <div className={style.createForm}>
@@ -261,18 +282,18 @@ function PokemonCreate() {
                 return (
                   <option value={t.name} key={i}>
                     {t.name}
-                    {!error ? null : <p className={style.errorT}>{error.types}</p>}
                   </option>
                 );
               })}
             </select>
-            {Create.types.map((e, i) => {
+            {!error ? null : <p className={style.errorT}>{error.types}</p>}
+            {simon.map((e, i) => {
               return (
                 <div key={i} className={style.type}>
                   <button
                     type="button"
                     className={style.eliminate}
-                    onClick={() => handleDelete(e)}
+                    onClick={(e) => handleChange(e)}
                   >
                     X
                   </button>
