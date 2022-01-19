@@ -7,6 +7,7 @@ export const FILTER_BY_TYPES = "FILTER_BY_TYPES";
 export const ORDER_BY_CREATE = "ORDER_BY_CREATE";
 export const ORDER_ALPHABE = "ORDER_ALPHABE";
 export const ORDER_FUERZA = "ORDER_FUERZA";
+export const DELETE_POKEMON_DETAIL = "DELETE_POKEMON_DETAIL";
 
 export function GetAllPokemons() {
   return function (dispatch) {
@@ -100,4 +101,11 @@ export function Ordenfuerza(payload) {
     type: ORDER_FUERZA,
     payload,
   };
+}
+
+export function DeleteDetail() {
+  return { 
+    type: DELETE_POKEMON_DETAIL, 
+    payload: {} 
+  }
 }

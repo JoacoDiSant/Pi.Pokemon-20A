@@ -8,9 +8,8 @@ import style from "./Detail.module.css";
 
 function Detail(props) {
   const details = useSelector((state) => state.details);
-  console.log(details);
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getPokemonById(props.match.params.id));
@@ -24,15 +23,14 @@ function Detail(props) {
         </Link>
         <h1 className={style.name}>{details.name}</h1>
         <div className={style.types}>
-          {
-          details.createInDatabase
-            ? details.types.map((e) => {
-                const nameType = e.name;
-                return <h3>{nameType}</h3>;
-              })
-            : <h3>{details.types}</h3>
-
-          }
+          {details.createInDatabase ? (
+            details.types.map((e) => {
+              const nameType = e.name;
+              return <h3>{nameType}</h3>;
+            })
+          ) : (
+            <h3>{details.types}</h3>
+          )}
         </div>
         <h4 className={style.info}>Hp {details.hp}</h4>
         <h4 className={style.info}>Attack {details.attack}</h4>

@@ -111,12 +111,6 @@ export default function CreatePokemon() {
 
   function handleSelect(e) {
     if (handleTypes.find((x) => x === e.target.value)) {
-      setInput({
-        ...input,
-        types: !input.types.includes(e.target.value)
-          ? [...input.types, e.target.value]
-          : input.types,
-      });
       setHandleTypes(handleTypes.filter((x) => x !== e.target.value));
     } else {
       if (handleTypes.length === 2) return;
@@ -277,7 +271,8 @@ export default function CreatePokemon() {
               <div key={i} className={style.type}>
                 <button
                   type="button"
-                  onClick={() => handleChange(e)}
+                  value={e}
+                  onClick={(e) => handleSelect(e)}
                   className={style.eliminate}
                 >
                   X

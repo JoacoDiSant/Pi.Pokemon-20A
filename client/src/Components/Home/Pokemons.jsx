@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GetAllPokemons } from "../../StoreFiles/actions";
+// import ErrorPage from "../ErrorPage/index";
 import Pokemon from "../Card/Pokemon";
 import NavBar from "../NavBar/NavBar";
 import Paginado from "../Paginado/Paginado";
@@ -12,17 +12,22 @@ import {
   FilterByTypes,
   getTypes,
   FilterCreated,
+  DeleteDetail,
+  GetAllPokemons,
 } from "../../StoreFiles/actions";
 import style from "./Pokemons.module.css";
 
 function Pokemons() {
-  
   let dispatch = useDispatch();
 
   const pokemon = useSelector((state) => state.pokemons);
 
   useEffect(() => {
     dispatch(GetAllPokemons());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(DeleteDetail());
   }, [dispatch]);
 
   // -------- Paginado -------------
@@ -35,6 +40,7 @@ function Pokemons() {
     indexOfFirstPokemon,
     indexOfLastPokemon
   );
+
   const paginado = (numberpage) => {
     SetCurrentPage(numberpage);
     setPokemonPerPage(12);

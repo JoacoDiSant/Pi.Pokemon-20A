@@ -35,13 +35,14 @@ export default function rootReducer(state = initialState, action) {
       };
 
     case "FILTER_BY_TYPES":
-      let typefilt = action.payload === "All"
+      let typefilt =
+        action.payload === "All"
           ? state.AllPokemons
-          : state.AllPokemons.filter((p) =>
-              p.types.some(
+          : state.AllPokemons.filter((p) => {
+              return p.types.some(
                 (t) => t === action.payload || t.name === action.payload
-              )
-            );
+              );
+            });
       return {
         ...state,
         pokemons: typefilt,
@@ -107,6 +108,12 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         pokemons: sortedAttack,
+      };
+
+    case "DELETE_POKEMON_DETAIL":
+      return {
+        ...state,
+        details: action.payload,
       };
 
     default:
