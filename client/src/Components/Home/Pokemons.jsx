@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import ErrorPage from "../ErrorPage/index";
 import Pokemon from "../Card/Pokemon";
+// import ErrorPage from "../ErrorPage/index";
 import NavBar from "../NavBar/NavBar";
 import Paginado from "../Paginado/Paginado";
 import Loading from "../Loading/Loading";
@@ -81,9 +81,10 @@ function Pokemons() {
   }
 
   // ----------------------------------------
+  console.log(currentPokemons)
 
   if (currentPokemons) {
-    const pokeComponent = () => (
+     var pokeComponent = () => (
       <div className="Home">
         <NavBar />
 
@@ -159,6 +160,7 @@ function Pokemons() {
         })}
       </div>
     );
+  
     return currentPokemons.length ? pokeComponent() : <Loading />;
   }
 }

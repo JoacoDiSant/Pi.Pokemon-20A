@@ -1,17 +1,31 @@
-.cuatrocerocuatro,
-.error,
-.back {
-  font-size: 100px;
-  color: white;
-  text-shadow: 0px -5px 13px #ff0000;
-}
-
 .cuatrocerocuatro {
+  width: 500px;
+  height: 100px;
+  left: 700px;
+  top: 130px;
+  position: absolute;
+  font-size: 80px;
   animation: slide-right 1s linear infinite alternate-reverse both;
 }
 
 .error {
+  width: 500px;
+  height: 100px;
+  left: 700px;
+  bottom: 520px;
+  position: absolute;
+  font-size: 60px;
   animation: slide-right 1s linear infinite alternate both;
+}
+
+.error1 {
+  width: 500px;
+  height: 100px;
+  left: 700px;
+  bottom: 420px;
+  position: absolute;
+  font-size: 80px;
+  animation: slide-right 1s linear infinite alternate-reverse both;
 }
 
 @keyframes slide-right {
@@ -23,7 +37,24 @@
   }
 }
 
-.back{
+.back {
   text-decoration: none;
   cursor: pointer;
+}
+
+.backbtn {
+  color: black;
+  font-size: 80px;
+  border: 2px dotted rgba(106, 68, 154, 1); 
+  border-radius: 100px 0px 100px 0px;
+  width: 530px;
+  height: 100px;
+  position: absolute;
+  top: 620px;
+  left: 650px;
+}
+
+.backbtn:hover{
+  -webkit-transform: rotate(-7deg);
+  transform: rotate(-7deg);
 }

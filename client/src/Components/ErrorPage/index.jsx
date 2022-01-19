@@ -5,10 +5,11 @@ import style from './indexE.module.css'
 function index() {
   return (
     <div className={style.ErrorCont}>
-      <h1 className={style.cuatrocerocuatro}>404</h1>
-      <h1 className={style.error}>ERROR</h1>
-      <Link to="/home">
-        <h1 className={style.back}>GO BACK</h1>
+      <h1 className={style.cuatrocerocuatro}>UPS!!</h1>
+      <h1 className={style.error}>OCURRIO UN</h1>
+      <h1 className={style.error1}>ERROR</h1>
+      <Link to="/home" className={style.back}>
+        <h1 className={style.backbtn}>VOLVER</h1>
       </Link>
     </div>
   );
