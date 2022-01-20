@@ -104,8 +104,8 @@ export function Ordenfuerza(payload) {
 }
 
 export function DeleteDetail() {
-  return { 
-    type: DELETE_POKEMON_DETAIL, 
-    payload: {} 
-  }
+  return {
+    type: DELETE_POKEMON_DETAIL,
+    payload: {},
+  };
 }

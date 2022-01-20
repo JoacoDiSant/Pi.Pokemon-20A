@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Pokemon from "../Card/Pokemon";
-// import ErrorPage from "../ErrorPage/index";
+import ErrorPage from "../ErrorPage/index";
 import NavBar from "../NavBar/NavBar";
 import Paginado from "../Paginado/Paginado";
 import Loading from "../Loading/Loading";
@@ -36,9 +36,11 @@ function Pokemons() {
   const [PokemonPerPage, setPokemonPerPage] = useState(12);
   const indexOfLastPokemon = CurrentPage * PokemonPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - PokemonPerPage;
-  const currentPokemons = pokemon.slice(
-    indexOfFirstPokemon,
-    indexOfLastPokemon
+
+  const currentPokemons = useSelector((state) =>
+    state.pokemons
+      ? state.pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon)
+      : false
   );
 
   const paginado = (numberpage) => {
@@ -59,11 +61,13 @@ function Pokemons() {
   function handleFiltType(e) {
     e.preventDefault();
     dispatch(FilterByTypes(e.target.value));
+    SetCurrentPage(1);
   }
 
   function handleFilterCreated(e) {
     e.preventDefault();
     dispatch(FilterCreated(e.target.value));
+    SetCurrentPage(1);
   }
 
   function handleSort(e) {
@@ -81,10 +85,12 @@ function Pokemons() {
   }
 
   // ----------------------------------------
-  console.log(currentPokemons)
+  console.log(currentPokemons);
 
-  if (currentPokemons) {
-     var pokeComponent = () => (
+  if (!currentPokemons) {
+    return <ErrorPage />;
+  } else if (currentPokemons.length) {
+    return (
       <div className="Home">
         <NavBar />
 
@@ -160,8 +166,9 @@ function Pokemons() {
         })}
       </div>
     );
-  
-    return currentPokemons.length ? pokeComponent() : <Loading />;
+  } else {
+    console.log("last");
+    return <Loading />;
   }
 }
 

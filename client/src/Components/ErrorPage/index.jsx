@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import style from './indexE.module.css'
 
-function index() {
+function ErrorPage() {
+
   return (
     <div className={style.ErrorCont}>
       <h1 className={style.cuatrocerocuatro}>UPS!!</h1>
@@ -15,4 +16,4 @@ function index() {
   );
 }
 
-export default index;
+export default ErrorPage;

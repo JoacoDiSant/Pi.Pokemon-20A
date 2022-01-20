@@ -43,10 +43,18 @@ export default function rootReducer(state = initialState, action) {
                 (t) => t === action.payload || t.name === action.payload
               );
             });
-      return {
-        ...state,
-        pokemons: typefilt,
-      };
+      if (typefilt.length) {
+        return {
+          ...state,
+          filter: true,
+          pokemons: typefilt,
+        };
+      }else {
+        return{
+          ...state,
+          pokemons: false
+        }
+      }
 
     case "ORDER_BY_CREATE":
       let create =
